@@ -22,7 +22,7 @@ func repeatMe(words ...string) {
 }
 
 func main() {
-	totalLength, upperName := lenAndUpper("nico")
+	totalLength, upperName := lenAndUpper("youngmin")
 	fmt.Println(totalLength, upperName)
 	names := [5]string{"y", "o", "u", "n", "g"}
 	fmt.Println(names)
