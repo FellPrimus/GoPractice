@@ -5,6 +5,12 @@ import (
 	"strings"
 )
 
+type person struct {
+	name    string
+	age     int
+	favFood []string
+}
+
 func canIDrink(age int) bool {
 	if koreanAge := age + 2; koreanAge < 18 {
 		return false
@@ -24,7 +30,8 @@ func repeatMe(words ...string) {
 func main() {
 	totalLength, upperName := lenAndUpper("youngmin")
 	fmt.Println(totalLength, upperName)
-	names := [5]string{"y", "o", "u", "n", "g"}
+	names := []string{"y", "o", "u", "n", "g"}
+	names = append(names, "m")
 	fmt.Println(names)
 
 	repeatMe("young", "min", "go", "study")
