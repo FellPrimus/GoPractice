@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"strings"
+
+	"github.com/FellPrimus/learngo/accounts"
 )
 
 type person struct {
@@ -35,4 +37,13 @@ func main() {
 	fmt.Println(names)
 
 	repeatMe("young", "min", "go", "study")
+
+	account := accounts.NewAccount("youngmin")
+	account.Deposit(10)
+	fmt.Println(account.Balance())
+	err := account.Withdraw(20)
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(account.Balance())
 }
