@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	"github.com/FellPrimus/learngo/accounts"
+	"github.com/FellPrimus/learngo/mydict"
 )
 
 type person struct {
@@ -45,4 +46,12 @@ func main() {
 		fmt.Println(err)
 	}
 	fmt.Println(account.Balance(), account.Owner())
+
+	dictionary := mydict.Dictionary{"first": "First word"}
+	definition, err := dictionary.Search("second")
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println(definition)
+	}
 }
