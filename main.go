@@ -41,17 +41,20 @@ func main() {
 
 	account := accounts.NewAccount("youngmin")
 	account.Deposit(10)
-	err := account.Withdraw(20)
-	if err != nil {
-		fmt.Println(err)
-	}
-	fmt.Println(account.Balance(), account.Owner())
+	/*
+		err := account.Withdraw(20)
+		if err != nil {
+			fmt.Println(err)
+		}
+		fmt.Println(account.Balance(), account.Owner())*/
 
-	dictionary := mydict.Dictionary{"first": "First word"}
-	definition, err := dictionary.Search("second")
+	dictionary := mydict.Dictionary{}
+	word := "hello"
+	definition := "Greeting"
+	err := dictionary.Add(word, definition)
 	if err != nil {
 		fmt.Println(err)
-	} else {
-		fmt.Println(definition)
 	}
+	hello, err := dictionary.Search(word)
+	fmt.Println(hello)
 }
