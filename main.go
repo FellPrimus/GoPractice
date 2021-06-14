@@ -49,12 +49,24 @@ func main() {
 		fmt.Println(account.Balance(), account.Owner())*/
 
 	dictionary := mydict.Dictionary{}
-	word := "hello"
-	definition := "Greeting"
+	baseWord := "hello"
+	/*definition := "Greeting"
 	err := dictionary.Add(word, definition)
 	if err != nil {
 		fmt.Println(err)
 	}
 	hello, err := dictionary.Search(word)
-	fmt.Println(hello)
+	fmt.Println(hello)*/
+	dictionary.Add(baseWord, "First")
+	err := dictionary.Update(baseWord, "Second")
+	if err != nil {
+		fmt.Println(err)
+	}
+	word, _ := dictionary.Search(baseWord)
+	fmt.Println(word)
+	dictionary.Delete(baseWord)
+	word, err := dictionary.Search(baseWord)
+	if err != nil {
+		fmt.Println(err)
+	}
 }
