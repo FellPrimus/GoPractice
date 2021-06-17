@@ -1,72 +1,29 @@
 package main
 
 import (
+	"errors"
 	"fmt"
-	"strings"
-
-	"github.com/FellPrimus/learngo/accounts"
-	"github.com/FellPrimus/learngo/mydict"
+	"net/http"
 )
 
-type person struct {
-	name    string
-	age     int
-	favFood []string
-}
-
-func canIDrink(age int) bool {
-	if koreanAge := age + 2; koreanAge < 18 {
-		return false
-	}
-	return true
-}
-
-func lenAndUpper(name string) (int, string) {
-	defer fmt.Println("I'm done")
-	return len(name), strings.ToUpper(name)
-}
-
-func repeatMe(words ...string) {
-	fmt.Println(words)
-}
+var errRequestFailed = errors.New("Request failed")
 
 func main() {
-	totalLength, upperName := lenAndUpper("youngmin")
-	fmt.Println(totalLength, upperName)
-	names := []string{"y", "o", "u", "n", "g"}
-	names = append(names, "m")
-	fmt.Println(names)
-
-	repeatMe("young", "min", "go", "study")
-
-	account := accounts.NewAccount("youngmin")
-	account.Deposit(10)
-	/*
-		err := account.Withdraw(20)
-		if err != nil {
-			fmt.Println(err)
-		}
-		fmt.Println(account.Balance(), account.Owner())*/
-
-	dictionary := mydict.Dictionary{}
-	baseWord := "hello"
-	/*definition := "Greeting"
-	err := dictionary.Add(word, definition)
-	if err != nil {
-		fmt.Println(err)
+	urls := []string{
+		"https://www.naver.com/",
+		"https://www.google.co.kr/",
+		"https://www.daum.net/",
 	}
-	hello, err := dictionary.Search(word)
-	fmt.Println(hello)*/
-	dictionary.Add(baseWord, "First")
-	err := dictionary.Update(baseWord, "Second")
-	if err != nil {
-		fmt.Println(err)
+	for _, url := range urls {
+		hitURL(url)
 	}
-	word, _ := dictionary.Search(baseWord)
-	fmt.Println(word)
-	dictionary.Delete(baseWord)
-	word, err := dictionary.Search(baseWord)
-	if err != nil {
-		fmt.Println(err)
+}
+
+func hitURL(url string) error {
+	fmt.Println("Checking:", url)
+	resp, err := http.Get(url)
+	if err == nil || resp.StatusCode >= 400 {
+		return errRequestFailed
 	}
+	return nil
 }
